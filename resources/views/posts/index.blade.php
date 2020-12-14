@@ -166,7 +166,7 @@
                                 <div class="form-group mb-0  text-muted">
                                     <div class="input-group is-invalid">
                                         <input type="hidden" name="post_id" value="{{$post->id}}">
-                                        <textarea class="form-control" id="body" name='body' rows="1" cols="1" placeholder="Add a comment..."></textarea>
+                                        <textarea class="form-control" id="body" name='body' rows="1" cols="1" style="border-style: none" placeholder="Add a comment..."></textarea>
                                         <div class="input-group-append">
                                             <button class="btn btn-md btn-outline-info" type="submit">Post</button>
                                         </div>
