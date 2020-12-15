@@ -28,11 +28,11 @@
 
         <!-- Header section -->
         <nav class="navbar fixed-top navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
+            <div class="container ">
 
                 <!-- Logo -->
                 <a href="{{ url('/') }}" class="navbar-brand">
-                    <img src="{{asset('img/cleanlogo.png')}}" alt="InstaClone Logo" >
+                    <img class = "" src="{{asset('img/vivu-text.png')}}" alt="InstaClone Logo" >
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar5">
                     <span class="navbar-toggler-icon"></span>

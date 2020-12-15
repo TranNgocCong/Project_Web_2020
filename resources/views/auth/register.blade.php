@@ -3,9 +3,10 @@
 @section('form')
     <form method="POST" action="{{ route('register') }}" class="login100-form validate-form">
         @csrf
-        <span class="login100-form-title p-b-34">
-            Sign Up
-        </span>
+        <div class="login100-form-title p-b-10">
+                <img src="{{asset('img/vivu-logo.png')}}" />
+            </div>
+        <span class="login100-form-title p-b-20" style="font-size: 17px">Đăng ký để xem ảnh và video từ bạn bè.</span>
 
         <div class="wrap-input100 validate-input m-b-20" data-validate="Type user name">
             <input id="email" type="email" class="input100 @error('email') is-invalid @enderror"  name="email" placeholder="Email">
@@ -72,6 +73,3 @@
                 Login
             </a>
         </div>
-
-    </form>
-@endsection
