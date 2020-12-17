@@ -1,7 +1,7 @@
 @extends('layouts.authlayout')
 
 @section('form')
-    <form method="POST" action="{{ route('register') }}" class="login100-form validate-form">
+<form method="POST" action="{{ route('register') }}" class="login100-form validate-form">
         @csrf
         <div class="login100-form-title p-b-10">
                 <img src="{{asset('img/vivu-logo.png')}}" />
@@ -73,3 +73,6 @@
                 Login
             </a>
         </div>
+
+    </form>
+@endsection

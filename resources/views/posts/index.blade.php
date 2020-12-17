@@ -166,7 +166,7 @@
                                 <div class="form-group mb-0  text-muted">
                                     <div class="input-group is-invalid">
                                         <input type="hidden" name="post_id" value="{{$post->id}}">
-                                        <textarea class="form-control" id="body" name='body' rows="1" cols="1" style="border-style: none" placeholder="Add a comment..."></textarea>
+                                        <textarea class="form-control" id="body" name='body' rows="1" cols="1" style="border-style: none" placeholder="Add a comment..." required></textarea>
                                         <div class="input-group-append">
                                             <button class="btn btn-md btn-outline-info" type="submit">Post</button>
                                         </div>
@@ -244,7 +244,7 @@
 
                     <!-- CopyRight -->
                     <div>
-                        <span style='color: #a6b3be;'>© 2020 InstaClone </span>
+                        <span style='color: #a6b3be;'>© 2020 VIVU </span>
                     </div>
 
                 </div>

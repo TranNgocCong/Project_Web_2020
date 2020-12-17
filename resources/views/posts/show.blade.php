@@ -13,7 +13,7 @@
 
                     <!-- Card Image -->
                     <div class="col-md-8 h-100">
-                        <img src="{{ asset("storage/$post->image") }}" class="w-100 h-100">
+                        <img src="{{ asset("storage/$post->image") }}" class="w-100 h-100" >
                     </div>
 
                     <div class="col-md-4 h-100">
@@ -156,7 +156,7 @@
                                         <div class="input-group is-invalid">
                                             <input type="hidden" name="post_id" value="{{$post->id}}">
                                             <input type="hidden" name="redirect" value="show">
-                                            <textarea class="form-control py-2 px-3" id="body" name='body' rows="1" placeholder="Add a comment..."></textarea>
+                                            <textarea class="form-control py-2 px-3" id="body" name='body' rows="1" placeholder="Add a comment..." required></textarea>
                                             <div class="input-group-append">
                                                 <button class="btn btn-md btn-outline-info" type="submit">Post</button>
                                             </div>
