@@ -21,7 +21,7 @@ Route::resource('comments', 'CommentController');
 // Post Route
 Route::get('/', 'PostsController@index')->name('post.index');
 
-Route::post('/p/create', 'PostsController@create')->name('post.create');
+Route::get('/p/create', 'PostsController@create')->name('post.create');
 
 Route::post('like/{like}', 'LikeController@update2')->name('like.create');
 
