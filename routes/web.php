@@ -40,7 +40,7 @@ Route::get('/posts', 'PostsController@vue_index'); // Infinite scrolling
 // Profile Route
 Route::get('/profile/{user}/edit', 'ProfilesController@edit')->name('profile.edit');
 
-Route::get('/profile/{user}', 'ProfilesController@index')->name('profile.index');
+Route::post('/profile/{user}', 'ProfilesController@index')->name('profile.index');
 
 Route::patch('/profile/{user}', 'ProfilesController@update')->name('profile.update');
 
