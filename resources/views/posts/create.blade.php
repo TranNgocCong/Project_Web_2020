@@ -24,7 +24,7 @@ function preview_image(event)
 
                 <div class="card-body">
                 
-                    <form action="/p/" method="post" enctype="multipart/form-data">
+                    <form action="/p" method="post" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">
