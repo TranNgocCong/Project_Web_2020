@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Intervention\Image\Facades\Image;
+use Storage;
 
 class PostsController extends Controller
 {
@@ -51,7 +52,7 @@ class PostsController extends Controller
         return view('posts.create');
     }
 
-    public function store()
+    public function store(Request $request)
     {
 
         $data = request()->validate([
@@ -59,16 +60,16 @@ class PostsController extends Controller
             'image' => ['required', 'image']
         ]);
 
-        $imagePath = request('image')->store('/uploads', 'public');
-
-        $image = Image::make(public_path("storage/{$imagePath}"))->widen(600, function ($constraint) {
-            $constraint->upsize();
-        });
-        $image->save();
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $name = time() . $file->getClientOriginalName();
+            $filePath = 'images/posts/' . $name;
+            $path=Storage::disk('s3')->put($filePath, file_get_contents($file));
+        }
 
         auth()->user()->posts()->create([
             'caption' => $data['caption'],
-            'image' => $imagePath
+            'image' => 'https://vivu1.s3.amazonaws.com/images/posts/'. $name
         ]);
 
         return redirect('/profile/' . auth()->user()->username);

@@ -57,7 +57,7 @@
                         <!-- Card Image -->
                         <div class="js-post" ondblclick="showLike(this, 'like_{{ $post->id }}')">
                             <i class="fa fa-heart"></i>
-                            <img class="card-img" src="{{ asset("storage/$post->image") }}" alt="post image" style="max-height: 767px">
+                            <img class="card-img" src="{{ $post->image }}" alt="post image" style="max-height: 767px">
                         </div>
 
                         <!-- Card Body -->

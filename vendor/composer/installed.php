@@ -6,13 +6,20 @@
     'aliases' => 
     array (
     ),
-
-    'reference' => '8bb16962864d5be24f2384402290bbcfad76d87e',
-
+    'reference' => '2f16ce3cef6f5bb1af78d0d29b711cd74c4dc604',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
   array (
+    'aws/aws-sdk-php' => 
+    array (
+      'pretty_version' => '3.171.6',
+      'version' => '3.171.6.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '5587d22e63ef82ef74dffca5d47f307b84137b51',
+    ),
     'cordoval/hamcrest-php' => 
     array (
       'replaced' => 
@@ -134,6 +141,24 @@
       array (
       ),
       'reference' => 'fc10d778e4b84d5bd315dad194661e091d307c6f',
+    ),
+    'guzzlehttp/guzzle' => 
+    array (
+      'pretty_version' => '7.2.0',
+      'version' => '7.2.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '0aa74dfb41ae110835923ef10a9d803a22d50e79',
+    ),
+    'guzzlehttp/promises' => 
+    array (
+      'pretty_version' => '1.4.0',
+      'version' => '1.4.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '60d379c243457e073cff02bc323a2a86cb355631',
     ),
     'guzzlehttp/psr7' => 
     array (
@@ -399,9 +424,7 @@
       'aliases' => 
       array (
       ),
-
-      'reference' => '8bb16962864d5be24f2384402290bbcfad76d87e',
-
+      'reference' => '2f16ce3cef6f5bb1af78d0d29b711cd74c4dc604',
     ),
     'laravel/tinker' => 
     array (
@@ -448,6 +471,15 @@
       ),
       'reference' => '9be3b16c877d477357c015cec057548cf9b2a14a',
     ),
+    'league/flysystem-aws-s3-v3' => 
+    array (
+      'pretty_version' => '1.0.29',
+      'version' => '1.0.29.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '4e25cc0582a36a786c31115e419c6e40498f6972',
+    ),
     'league/mime-type-detection' => 
     array (
       'pretty_version' => '1.5.1',
@@ -474,6 +506,15 @@
       array (
       ),
       'reference' => 'f9eee5cec93dfb313a38b6b288741e84e53f02d5',
+    ),
+    'mtdowling/jmespath.php' => 
+    array (
+      'pretty_version' => '2.6.0',
+      'version' => '2.6.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '42dae2cbd13154083ca6d70099692fef8ca84bfb',
     ),
     'myclabs/deep-copy' => 
     array (
@@ -660,6 +701,22 @@
       'reference' => 'b7ce3b176482dbbc1245ebf52b181af44c2cf55f',
     ),
     'psr/event-dispatcher-implementation' => 
+    array (
+      'provided' => 
+      array (
+        0 => '1.0',
+      ),
+    ),
+    'psr/http-client' => 
+    array (
+      'pretty_version' => '1.0.1',
+      'version' => '1.0.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '2dfb5f6c5eff0e91e20e913f8c5452ed95b86621',
+    ),
+    'psr/http-client-implementation' => 
     array (
       'provided' => 
       array (

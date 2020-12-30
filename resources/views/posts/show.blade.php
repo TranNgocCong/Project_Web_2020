@@ -13,7 +13,7 @@
 
                     <!-- Card Image -->
                     <div class="col-md-8 h-100">
-                        <img src="{{ asset("storage/$post->image") }}" class="w-100 h-100" >
+                        <img src="{{ $post->image }}" class="w-100 h-100" >
                     </div>
 
                     <div class="col-md-4 h-100">

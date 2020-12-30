@@ -6,6 +6,7 @@ use App\Story;
 use App\User;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
+use Storage;
 
 class StoryController extends Controller
 {
@@ -44,14 +45,18 @@ class StoryController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
         ]);
 
-        $imagePath = request('image')->store('/story', 'public');
-
-        $image = Image::make(public_path("storage/{$imagePath}"));
-        $image->resize(500, 751);
-        $image->save();
-
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $name = time() . $file->getClientOriginalName();
+            $filePath = 'images/stories/' . $name;
+            $path=Storage::disk('s3')->put($filePath, file_get_contents($file));
+        }
+  
+       
+        
+        
         auth()->user()->stories()->create([
-            'image' => "http://localhost:8000/storage/" . $imagePath
+            'image' => 'https://vivu1.s3.amazonaws.com/images/stories/' .$name
         ]);
 
         return redirect('/profile/' . auth()->user()->username);
