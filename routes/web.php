@@ -55,3 +55,7 @@ Route::get('/stories/create', 'StoryController@create')->name('stories.create');
 Route::get('/stories/{user}', 'StoryController@show')->name('stories.show');
 
 Route::post('/stories', 'StoryController@store')->name('stories.store');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
