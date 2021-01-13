@@ -56,6 +56,7 @@ Route::get('/stories/{user}', 'StoryController@show')->name('stories.show');
 
 Route::post('/stories', 'StoryController@store')->name('stories.store');
 
+// Albums Route
 Route::get('/albums/create', 'AlbumController@create')->name('album.create')->middleware('auth');
 
 Route::post('/albums/store', 'AlbumController@store');
@@ -63,3 +64,5 @@ Route::post('/albums/store', 'AlbumController@store');
 Route::get('/albums', 'AlbumController@index')->middleware('auth');
 
 Route::get('/getalbums', 'AlbumController@getAlbums')->middleware('auth');
+
+Route::put('/albums/{id}/edit','AlbumController@update');

@@ -37,7 +37,7 @@
                 </tr>
             </tbody>
         </table>
-        <edit></edit>
+        <edit :editrecord="records" @recordUpdated="recordUpdate"></edit>
     </div>
 </template>
 
@@ -45,7 +45,8 @@
 export default {
     data() {
         return {
-            albums: []
+            albums: [],
+            records: []
         };
     },
     created() {
@@ -59,7 +60,19 @@ export default {
             });
     },
     methods: {
-        edit(id) {}
+        edit(id) {
+            axios
+                .get("/api/albums/" + id)
+                .then(response => {
+                    this.records = response.data;
+                })
+                .catch(error => {
+                    alert("unable to fetch data");
+                });
+        },
+        recordUpdate(response) {
+            this.albums = response.data;
+        }
     }
 };
 </script>
