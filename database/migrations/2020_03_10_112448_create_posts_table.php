@@ -18,6 +18,7 @@ class CreatePostsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->longText('caption');
             $table->string('image');
+            $table->string('album_id');
             $table->bigInteger('likes')->default(0);
             $table->timestamps();
 

@@ -27,6 +27,9 @@ Vue.use(require('vue-resource'));
 
 Vue.component('follow-button', require('./components/FollowButton.vue').default);
 
+Vue.component('edit', require('./components/EditComponent.vue').default);
+Vue.component('album', require('./components/AlbumComponent.vue').default);
+Vue.component('index', require('./components/IndexComponent.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
