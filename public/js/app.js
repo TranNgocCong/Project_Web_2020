@@ -2182,6 +2182,14 @@ __webpack_require__.r(__webpack_exports__);
         $("#exampleModal").modal("hide");
 
         _this2.$emit("recordUpdated", response);
+
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Your changes has been saved",
+          showConfirmButton: false,
+          timer: 1500
+        });
       })["catch"](function (error) {
         console.log(error);
       });
@@ -2296,6 +2304,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2324,6 +2341,34 @@ __webpack_require__.r(__webpack_exports__);
     },
     recordUpdate: function recordUpdate(response) {
       this.albums = response.data;
+    },
+    deleteRecord: function deleteRecord(id) {
+      var _this3 = this;
+
+      Swal.fire({
+        title: "Are you sure?",
+        icon: "warning",
+        text: "You won't be able to revert this!",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, delete it"
+      }).then(function (result) {
+        if (result.value) {
+          axios["delete"]("/albums/" + id + "/delete").then(function (response) {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Your changes has been saved",
+              showConfirmButton: false,
+              timer: 1500
+            });
+            _this3.albums = response.data;
+          })["catch"](function (error) {
+            console.log(error);
+          });
+        }
+      });
     }
   }
 });
@@ -39105,6 +39150,26 @@ var render = function() {
                     )
                   ]
                 )
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger",
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.deleteRecord(album.id)
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                        Delete\n                    "
+                    )
+                  ]
+                )
               ])
             ])
           }),
@@ -39137,7 +39202,9 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Category")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Edit")])
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Edit")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Delete")])
       ])
     ])
   }

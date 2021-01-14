@@ -138,6 +138,13 @@ export default {
                 .then(response => {
                     $("#exampleModal").modal("hide");
                     this.$emit("recordUpdated", response);
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Your changes has been saved",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
                 })
                 .catch(error => {
                     console.log(error);

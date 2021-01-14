@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,10 +13,12 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    {{-- <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> --}}
+    {{--
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> --}}
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -23,6 +26,7 @@
 
 
 </head>
+
 <body>
     <div id="app">
 
@@ -32,7 +36,7 @@
 
                 <!-- Logo -->
                 <a href="{{ url('/') }}" class="navbar-brand">
-                    <img class = "" src="{{asset('img/vivu-text.png')}}" alt="InstaClone Logo" >
+                    <img class="" src="{{ asset('img/vivu-text.png') }}" alt="InstaClone Logo">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar5">
                     <span class="navbar-toggler-icon"></span>
@@ -45,7 +49,8 @@
                         @csrf
                         <div class="input-group">
                             <input class="form-control" name="q" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" style="border-color: #ced4da"><i class="fas fa-search"></i></button>
+                            <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit"
+                                style="border-color: #ced4da"><i class="fas fa-search"></i></button>
                         </div>
                     </form>
 
@@ -77,9 +82,12 @@
                                 </a>
                             </li> --}}
                             <li class="nav-item pl-2">
-                                <a href="/profile/{{Auth::user()->username}}" class="nav-link" style="width: 42px; height: 22px; padding-top: 6px;" >
-                                    <img src="{{ asset(Auth::user()->profile->getProfileImage())  }}" class="rounded-circle w-100">
-                                    {{-- <i class="far fa-user fa-2x"></i> --}}
+                                <a href="/profile/{{ Auth::user()->username }}" class="nav-link"
+                                    style="width: 42px; height: 22px; padding-top: 6px;">
+                                    <img src="{{ asset(Auth::user()->profile->getProfileImage()) }}"
+                                        class="rounded-circle w-100">
+                                    {{-- <i class="far fa-user fa-2x"></i>
+                                    --}}
                                 </a>
                             </li>
 
@@ -88,7 +96,8 @@
                             {{-- @if (Route::is('profile.index')) --}}
 
                                 <li class="nav-item dropdown">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre></a>
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre></a>
 
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
@@ -104,18 +113,21 @@
                                             </a>
                                         @endcan
 
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                            document.getElementById('logout-form').submit();">
+                                        <a class="dropdown-item" href="{{ url('/albums') }}" role="button">My Album</a>
+
+                                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
                                             {{ __('Logout') }}
                                         </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            style="display: none;">
                                             @csrf
                                         </form>
                                     </div>
                                 </li>
-                            {{-- @endif --}}
+                                {{--
+                            @endif --}}
 
                         @endguest
                     </ul>
@@ -133,5 +145,5 @@
     @yield('exscript')
 
 </body>
-</html>
 
+</html>
