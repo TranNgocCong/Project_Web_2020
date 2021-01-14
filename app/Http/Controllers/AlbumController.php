@@ -64,6 +64,12 @@ class AlbumController extends Controller
         if ($success){
             return response()->json($this->getAlbums());
         }
+    }
 
+    public function destroy($id){
+        $album = Album::find($id)->delete();
+        if($album){
+            return response()->json($this->getAlbums());
+        }
     }
 }
