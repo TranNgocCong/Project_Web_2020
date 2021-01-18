@@ -11,7 +11,7 @@
                     <!-- User Info -->
                     <div class="d-flex align-items-center my-3 ">
                         <a href="/profile/{{$user->username}}" style="width: 56px; height: 56px;">
-                            <img src="{{ asset($user->profile->getProfileImage()) }}" class="rounded-circle w-100">
+                            <img src="{{ asset($user->profile->image) }}" class="rounded-circle w-100">
                         </a>
                         <div class='d-flex flex-column pl-3'>
                             <a href="/profile/{{$user->username}}" class='h5 m-0 text-dark text-decoration-none' >

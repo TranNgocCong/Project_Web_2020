@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Intervention\Image\Facades\Image;
-
+use Storage;
 
 class ProfilesController extends Controller
 {
@@ -72,9 +72,13 @@ class ProfilesController extends Controller
         ]);
 
         if (request('image')) {
-            $imagePath = request('image')->store('/profile', 'public');
-            $image = Image::make(public_path("storage/{$imagePath}"))->fit(300, 300);
-            $image->save();
+           
+                $file = $request->file('image');
+                $name = time() . $file->getClientOriginalName();
+                $filePath = 'images/stories/' . $name;
+                $path=Storage::disk('s3')->put($filePath, file_get_contents($file));
+                $imagePath ='https://vivu1.s3.amazonaws.com/images/stories/'.$name;
+    
             $imageArray = ['image' => $imagePath];
         }
 

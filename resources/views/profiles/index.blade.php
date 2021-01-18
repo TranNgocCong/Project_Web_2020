@@ -7,10 +7,10 @@
 
             @if ($user->stories->count() > 0)
                 <a href="/stories/{{$user->username}}" >
-                    <img src="{{ asset($user->profile->getProfileImage()) }}" class="border-linear  w-100">
+                    <img src="{{ asset($user->profile->image )}}" class="border-linear  w-100">
                 </a>
             @else
-                <img src="{{ asset($user->profile->getProfileImage()) }}" class="rounded-circle w-100">
+                <img src="{{ asset($user->profile->image) }}" class="rounded-circle w-100">
             @endif
         </div>
 
