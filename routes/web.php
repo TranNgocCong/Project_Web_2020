@@ -55,3 +55,20 @@ Route::get('/stories/create', 'StoryController@create')->name('stories.create');
 Route::get('/stories/{user}', 'StoryController@show')->name('stories.show');
 
 Route::post('/stories', 'StoryController@store')->name('stories.store');
+
+// Albums Route
+Route::get('/getalbums', 'AlbumController@getAlbums')->middleware('auth');
+
+Route::get('/albums/create', 'AlbumController@create')->name('album.create')->middleware('auth');
+
+Route::get('/albums', 'AlbumController@index')->middleware('auth');
+
+Route::post('/albums/store', 'AlbumController@store')->middleware('auth');
+
+Route::put('/albums/{id}/edit','AlbumController@update')->middleware('auth');
+
+Route::delete('/albums/{id}/delete','AlbumController@destroy')->middleware('auth');
+
+Route::get('upload/images/{id}', 'GalleryController@create')->middleware('auth');
+
+Route::post('uploadImage', 'GalleryController@upload')->middleware('auth');
