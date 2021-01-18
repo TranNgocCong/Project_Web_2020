@@ -1206,6 +1206,7 @@ pre code {
   }
 
   .col-md-8 {
+    margin-top: 30px;
     flex: 0 0 66.6666666667%;
     max-width: 66.6666666667%;
   }
@@ -3104,7 +3105,7 @@ fieldset:disabled a.btn {
 
 .btn-outline-info {
   color: #6cb2eb;
-  border-color: #6cb2eb;
+  /*border-color: #6cb2eb;*/
 }
 
 .btn-outline-info:hover {
@@ -5000,8 +5001,8 @@ input[type=button].btn-block {
 .card-header {
   padding: 0.75rem 1.25rem;
   margin-bottom: 0;
-  background-color: rgba(0, 0, 0, 0.03);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  background-color:#6cb2eb;
+  border-bottom: 1px solid rgba(52, 144, 220, 0.5);
 }
 
 .card-header:first-child {

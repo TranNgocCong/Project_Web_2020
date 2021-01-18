@@ -148,7 +148,7 @@
                                     @if (count($post->comments) > 0)
                                         <a href="/p/{{ $post->id }}" class="text-muted">View all {{count($post->comments)}} comments</a>
                                     @endif
-                                    @foreach ($post->comments->sortByDesc("created_at")->take(2) as $comment)
+                                    @foreach ($post->comments->sortByDesc("created_at")->take(9) as $comment )
                                         <p  class='mb-1'><a href="/profile/{{$comment->user->username}}" >{{ $comment->user->name }}</a>  {{ $comment->body }}</p>
                                     @endforeach
                                 </div>
@@ -166,7 +166,7 @@
                                 <div class="form-group mb-0  text-muted">
                                     <div class="input-group is-invalid">
                                         <input type="hidden" name="post_id" value="{{$post->id}}">
-                                        <textarea class="form-control" id="body" name='body' rows="1" cols="1" style="border-style: none" placeholder="Add a comment..." required></textarea>
+                                        <input class="form-control" id="body" name='body' rows="1" cols="1" style="border-style: none" placeholder="Add a comment..." required></input>
                                         <div class="input-group-append">
                                             <button class="btn btn-md btn-outline-info" type="submit">Post</button>
                                         </div>
@@ -309,3 +309,26 @@
 
     </script> --}}
 @endsection
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
+        encrypted: true,
+        cluster: "ap1",
+    });
+    var channel = pusher.subscribe('my-channel');
+
+    channel.bind('my-event', function(data) {
+        alert(JSON.stringify(data));
+        var newNotificationHtml = `
+        <p  class='mb-1'><a href="/profile/`+data.username.username+`" >`+data.username.username+`</a> `+data.data.body+`</p>
+        `;
+
+        $('.comments').prepend(newNotificationHtml);
+        
+    });
+    });
+    </script>
