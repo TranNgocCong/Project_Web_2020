@@ -69,6 +69,11 @@ Route::put('/albums/{id}/edit','AlbumController@update')->middleware('auth');
 
 Route::delete('/albums/{id}/delete','AlbumController@destroy')->middleware('auth');
 
+//Image Route
 Route::get('upload/images/{id}', 'GalleryController@create')->middleware('auth');
 
 Route::post('uploadImage', 'GalleryController@upload')->middleware('auth');
+
+Route::get('getimages', 'GalleryController@images')->middleware('auth');
+
+Route::delete('/image/{id}', 'GalleryController@destroy');

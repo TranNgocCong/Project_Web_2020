@@ -2411,16 +2411,46 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["album_id"],
   data: function data() {
     return {
       uploadPercentage: "",
-      uploading: false
+      uploading: false,
+      images: []
     };
+  },
+  mounted: function mounted() {
+    this.getImage();
   },
   methods: {
     submitFiles: function submitFiles() {
+      var _this = this;
+
       var formData = new FormData();
 
       for (var i = 0; i < this.$refs.file.files.length; i++) {
@@ -2438,7 +2468,47 @@ __webpack_require__.r(__webpack_exports__);
         onUploadProgress: function (progressEvent) {
           this.uploadPercentage = parseInt(Math.round(progressEvent.loaded * 100 / progressEvent.total));
         }.bind(this)
-      }).then(function (response) {});
+      }).then(function (response) {
+        _this.getImage();
+      });
+    },
+    getImage: function getImage() {
+      var _this2 = this;
+
+      axios.get("/getimages").then(function (response) {
+        _this2.images = response.data;
+      })["catch"](function (error) {
+        alert("error");
+      });
+    },
+    DeleteImage: function DeleteImage(id) {
+      var _this3 = this;
+
+      Swal.fire({
+        title: "Are you sure?",
+        icon: "warning",
+        text: "You won't be able to revert this!",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, delete it"
+      }).then(function (result) {
+        if (result.value) {
+          axios["delete"]("/image/" + id).then(function (response) {
+            _this3.getImage();
+
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Your changes has been saved",
+              showConfirmButton: false,
+              timer: 1500
+            });
+          })["catch"](function (error) {
+            console.log(error);
+          });
+        }
+      });
     }
   }
 });
@@ -39346,7 +39416,49 @@ var render = function() {
           attrs: { max: "100" },
           domProps: { value: _vm.uploadPercentage }
         })
-      : _vm._e()
+      : _vm._e(),
+    _vm._v(" "),
+    _c("div", { staticClass: "container" }, [
+      _c("hr", { staticClass: "mt-2 mb-5" }),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "row text-center text-lg-left" },
+        _vm._l(_vm.images, function(image, index) {
+          return _c(
+            "div",
+            { key: index, staticClass: "col-lg-3 col-md-4 col-6" },
+            [
+              _c("a", { attrs: { href: "#" } }, [
+                _c("img", {
+                  staticClass: "img-fluid img-thumbnail",
+                  attrs: { src: "'/images/'+image.image" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger btn-sm",
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.DeleteImage(image.id)
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                        Delete\n                    "
+                    )
+                  ]
+                )
+              ])
+            ]
+          )
+        }),
+        0
+      )
+    ])
   ])
 }
 var staticRenderFns = []
