@@ -30,7 +30,6 @@
 
 <body>
     <div id="app">
-
         <!-- Header section -->
         <nav class="navbar fixed-top navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container ">
@@ -82,6 +81,32 @@
                                     <i class="far fa-heart fa-2x"></i>
                                 </a>
                             </li> --}}
+                            <li class="nav-item dropdown no-arrow px-2">
+                                <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="far fa-heart fa-2x"></i>
+                                    <!-- Counter - Messages -->
+                                    <span class="badge badge-danger badge-counter">7</span>
+                                </a>
+                                <!-- Dropdown - Messages -->
+                                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                    aria-labelledby="messagesDropdown">
+                                    <h6 class="dropdown-header">
+                                        Message Center
+                                    </h6>
+                                    <a class="dropdown-item d-flex align-items-center" href="#">
+                                        <div class="dropdown-list-image mr-3">
+                                            <img class="rounded-circle" src="img/undraw_profile_1.svg"
+                                                alt="">
+                                            <div class="status-indicator bg-success"></div>
+                                        </div>
+                                        <div class="font-weight-bold">
+                                            <div class="text-truncate">Thuc MAIIIII đã bình luận bài viết của bạn</div>
+                                            <div class="small text-gray-500">Emily Fowler · 58m</div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </li>
                             <li class="nav-item pl-2">
                                 <a href="/profile/{{ Auth::user()->username }}" class="nav-link"
                                     style="width: 42px; height: 22px; padding-top: 6px;">
