@@ -322,12 +322,12 @@
     var channel = pusher.subscribe('my-channel');
 
     channel.bind('my-event', function(data) {
-        alert(JSON.stringify(data));
+       
         var newNotificationHtml = `
         <p  class='mb-1'><a href="/profile/`+data.username.username+`" >`+data.username.username+`</a> `+data.data.body+`</p>
         `;
 
-        $('.comments').prepend(newNotificationHtml);
+        $('.comments').append(newNotificationHtml);
         
     });
     });
