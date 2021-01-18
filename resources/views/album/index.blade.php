@@ -6,7 +6,7 @@
             <h3>Your album</h3>
             <span style="margin-left: 700px;">
                 <a href="{{ route('album.create') }}">
-                    <button class="btn btn-primary">Create New Album</button>
+                    <button class="btn btn-primary" style = "background-color: #66FFFF; color: black">Create New Album</button>
                 </a>
             </span>
         </ol>
