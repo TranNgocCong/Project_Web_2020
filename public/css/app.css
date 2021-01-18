@@ -5177,8 +5177,9 @@ input[type=button].btn-block {
   padding: 0.75rem 1rem;
   margin-bottom: 1rem;
   list-style: none;
-  background-color: #e9ecef;
+  background-color: #6cb2eb;
   border-radius: 0.25rem;
+  margin-top: 40px;
 }
 
 .breadcrumb-item {
