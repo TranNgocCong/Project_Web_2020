@@ -25,7 +25,10 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 
-
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
 </head>
 
 <body>
@@ -84,13 +87,13 @@
                             <li class="nav-item dropdown no-arrow px-2">
                                 <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="far fa-heart fa-2x"></i>
+                                    <i class="far fa-heart fa-2x ", id ="click_fade"></i>
                                     <!-- Counter - Messages -->
-                                    <span class="badge badge-danger badge-counter">7</span>
+                                    <span class="badge badge-danger badge-counter" id ="count_noti">0</span>
                                 </a>
                                 <!-- Dropdown - Messages -->
                                 <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                    aria-labelledby="messagesDropdown">
+                                    aria-labelledby="messagesDropdown" id ="noti">
                                     <h6 class="dropdown-header">
                                         Message Center
                                     </h6>
@@ -100,10 +103,7 @@
                                                 alt="">
                                             <div class="status-indicator bg-success"></div>
                                         </div>
-                                        <div class="font-weight-bold">
-                                            <div class="text-truncate">Thuc MAIIIII đã bình luận bài viết của bạn</div>
-                                            <div class="small text-gray-500">Emily Fowler · 58m</div>
-                                        </div>
+                                        
                                     </a>
                                 </div>
                             </li>
@@ -169,7 +169,52 @@
     </div>
 
     @yield('exscript')
-
+    
 </body>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        var pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
+        encrypted: true,
+        cluster: "ap1",
+    });
+    var channel = pusher.subscribe('my-channel1');
+    let owner = "{{Auth::user()->username}}";
+    channel.bind('my-event1', function(data) {
+       if(data.owner.username==owner){
+        var newNotificationHtml = `
+        <a class="dropdown-item d-flex align-items-center" href="/p/`+data.cmtpost.id+`">
+                                        <div class="dropdown-list-image mr-3">
+                                            <img class="rounded-circle w-100" src="`+data.img.image+`"
+                                                alt="">
+                                            <div class="status-indicator bg-success"></div>
+                                        </div>
+                                        <div class="font-weight-bold">
+                                            <div class="text-truncate">`+data.commenter.name+` đã bình luận về bài viết của bạn </div>
+                                            
+                                        </div>
+                                    </a>
+        `;
+
+        $('#noti').append(newNotificationHtml);
+        let dem = $('#count_noti').text();
+        let dem1 = parseInt(dem)+1;
+        $('#count_noti').text(dem1);
+       }
+       
+        
+    });
+    $('#click_fade').click(function(){
+            $('#count_noti').text(0);
+        });
+    });
+    </script>
+    <script>
+        $('#click_fade').click(function(){
+            $('#count_noti').text(0);
+        });
+    </script>
 </html>

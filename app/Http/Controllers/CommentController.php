@@ -8,7 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Pusher\Pusher;
 use App\Events\CommentEvent;
+use App\Events\NotifyCommentEvent;
 use App\User;
+use App\Profile;
 
 class CommentController extends Controller
 {
@@ -57,8 +59,11 @@ class CommentController extends Controller
         ]);
        $acc = $acc->fresh();
        $username = User::where('id',Auth::id())->first();
-        $comment = Comment::where('body',$request->body)->first();
-        echo($comment);
+       $comment = Comment::where('body',$request->body)->first();
+       
+      $owner = User::where('id', $post->user_id)->first();
+      $profile = Profile::where('user_id', Auth::id())->first();
+      event(new NotifyCommentEvent($owner, $username,$profile,$post));
 
         event(new CommentEvent($comment,$username));
         
