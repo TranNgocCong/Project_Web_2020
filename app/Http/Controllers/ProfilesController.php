@@ -74,7 +74,7 @@ class ProfilesController extends Controller
         if (request('image')) {
            
                 $file = $request->file('image');
-                $name = time() . $file->getClientOriginalName();
+                $name = time() . $file->getClientOriginalName()->fit(300,300);
                 $filePath = 'images/stories/' . $name;
                 $path=Storage::disk('s3')->put($filePath, file_get_contents($file));
                 $imagePath ='https://vivu1.s3.amazonaws.com/images/stories/'.$name;
@@ -82,7 +82,7 @@ class ProfilesController extends Controller
             $imageArray = ['image' => $imagePath];
         }
 
-        auth()->user()->profile->update(array_merge(
+        auth()->user()->profile->update(array_merge(             
             $dataProfile,
             $imageArray ?? []
             // ['image' => $imagePath ?? $user->profile->image]
