@@ -416,6 +416,7 @@ h6,
 .lead {
   font-size: 1.125rem;
   font-weight: 300;
+  margin-left: 10px;
 }
 
 .display-1 {
@@ -440,6 +441,7 @@ h6,
   font-size: 3.5rem;
   font-weight: 300;
   line-height: 1.2;
+  margin-left: 10px;
 }
 
 hr {
@@ -2113,7 +2115,7 @@ pre code {
 .form-control {
   display: block;
   width: 100%;
-  height: calc(1.6em + 0.75rem + 2px);
+  /*height: calc(1.6em + 0.75rem + 2px);*/
   padding: 0.375rem 0.75rem;
   font-size: 0.9rem;
   font-weight: 400;
@@ -2704,8 +2706,8 @@ fieldset:disabled a.btn {
 
 .btn-secondary {
   color: #fff;
-  background-color: #6c757d;
-  border-color: #6c757d;
+  background-color: #6cb2eb;
+  border-color: rgba(52, 144, 220, 0.25);
 }
 
 .btn-secondary:hover {
@@ -4938,6 +4940,7 @@ input[type=button].btn-block {
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
+  margin-top:30px;
 }
 
 .card > hr {
@@ -4997,7 +5000,7 @@ input[type=button].btn-block {
 .card-header {
   padding: 0.75rem 1.25rem;
   margin-bottom: 0;
-  background-color: rgba(0, 0, 0, 0.03);
+  background-color:#6cb2eb;
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
 
@@ -5177,8 +5180,9 @@ input[type=button].btn-block {
   padding: 0.75rem 1rem;
   margin-bottom: 1rem;
   list-style: none;
-  background-color: #e9ecef;
+  background-color: #6cb2eb;
   border-radius: 0.25rem;
+  margin-top:30px;
 }
 
 .breadcrumb-item {
@@ -5490,6 +5494,8 @@ a.badge-dark.focus {
   padding-right: 0;
   padding-left: 0;
   border-radius: 0;
+  margin-top:30px;
+  background-color: #6cb2eb;
 }
 
 .alert {
