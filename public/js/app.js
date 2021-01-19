@@ -2319,6 +2319,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -6955,7 +6963,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.danger {\n    color: red;\n}\n", ""]);
+exports.push([module.i, "\n.danger {\r\n    color: red;\n}\r\n", ""]);
 
 // exports
 
@@ -39268,6 +39276,20 @@ var render = function() {
               _c("td", [_vm._v(_vm._s(album.category.name))]),
               _vm._v(" "),
               _c("td", [
+                _c(
+                  "a",
+                  { attrs: { href: "/albums/" + album.slug + "/" + album.id } },
+                  [
+                    _c("button", { staticClass: "btn btn-info" }, [
+                      _vm._v(
+                        "\n                            View\n                        "
+                      )
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("td", [
                 _c("a", { attrs: { href: "/upload/images/" + album.id } }, [
                   _c("button", { staticClass: "btn btn-success" }, [
                     _vm._v("Upload")
@@ -39349,6 +39371,8 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Description")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Category")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("View")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Upload")]),
         _vm._v(" "),
@@ -53674,8 +53698,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\xampp\htdocs\Project_Web_2020\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\xampp\htdocs\Project_Web_2020\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\xampp\htdocs\Web_2020\Project_Web_2020\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\xampp\htdocs\Web_2020\Project_Web_2020\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ }),
