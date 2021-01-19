@@ -47,4 +47,9 @@ class GalleryController extends Controller
         $image = Image::find($id);
         return $image->delete();
     }
+
+    public function viewAlbum($slug, $id){
+        $albums = Album::with('albumimages')->where('slug', $slug)->where('id', $id)->get();
+        return view('album.show', compact('albums'));
+    }
 }
