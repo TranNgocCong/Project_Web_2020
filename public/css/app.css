@@ -3801,7 +3801,7 @@ input[type=button].btn-block {
 .input-group > .custom-select:not(:first-child) {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
-  margin-left: -23px;
+ 
 }
 
 .input-group > .custom-file {
