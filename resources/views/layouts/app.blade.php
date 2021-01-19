@@ -90,7 +90,7 @@
                                 </a>
                                 <!-- Dropdown - Messages -->
                                 <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                    aria-labelledby="messagesDropdown">
+                                    aria-labelledby="messagesDropdown" id ="noti">
                                     <h6 class="dropdown-header">
                                         Message Center
                                     </h6>
@@ -169,7 +169,39 @@
     </div>
 
     @yield('exscript')
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        var pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
+        encrypted: true,
+        cluster: "ap1",
+    });
+    var channel = pusher.subscribe('my-channel1');
+    let owner = "{{Auth::user()->username}}";
+    channel.bind('my-event1', function(data) {
+    
+       if(data.owner.username==owner){
+        var newNotificationHtml = `
+        <a class="dropdown-item d-flex align-items-center" href="#">
+            <div class="dropdown-list-image mr-3">
+                <img class="rounded-circle fix-size" src="`+data.avano.image+`" alt="">
+                    <div class="status-indicator bg-success"></div>
+                    </div>
+                <div class="font-weight-bold">
+                    <div class="text-truncate">`+data.commenter.name+` đã bình luận bài viết của bạn</div>
+                    <div class="small text-gray-500">Emily Fowler · 58m</div>
+                </div>
+        </a>
+        `;
+
+        $('#noti').append(newNotificationHtml);
+       }
+    });
+    });
+    </script>
 </body>
 
 </html>

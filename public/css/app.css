@@ -17083,3 +17083,7 @@ readers do not read off random characters that represent icons */
 .topbar .dropdown-list .dropdown-item .text-truncate {
   max-width: 10rem;
 }
+.fix-size{
+  height: 30px;
+  width: 30px;
+}

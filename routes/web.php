@@ -77,3 +77,5 @@ Route::post('uploadImage', 'GalleryController@upload')->middleware('auth');
 Route::get('getimages', 'GalleryController@images')->middleware('auth');
 
 Route::delete('/image/{id}', 'GalleryController@destroy');
+
+Route::get('/albums/{slug}/{id}', 'GalleryController@viewAlbum');
