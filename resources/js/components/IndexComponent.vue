@@ -19,7 +19,7 @@
                     <th scope="row">{{ index + 1 }}</th>
                     <td class="w-25">
                         <img
-                            :src="'/album/' + album.image"
+                            :src="album.image"
                             class="img-fluid img-thumbnail"
                         />
                     </td>

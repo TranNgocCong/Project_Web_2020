@@ -27,7 +27,7 @@
                 >
                     <a href="#">
                         <img
-                            src="'/images/'+image.image"
+                            :src="image.image"
                             class="img-fluid img-thumbnail"
                         />
                         <button

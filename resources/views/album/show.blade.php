@@ -9,7 +9,7 @@
                         @foreach ($album->albumimages as $img)
                             <div class="col-lg-3 col-md-4 col-6">
                                 <a href="#">
-                                    <img src="{{ asset('images') }}/{{ $img->image }}" class="img-thumbnail">
+                                    <img src="{{ $img->image }}" class="img-thumbnail">
                                 </a>
                             </div>
                         @endforeach
