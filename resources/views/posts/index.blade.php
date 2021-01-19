@@ -117,7 +117,7 @@
                                                 <li class="list-group-item" style="position: absolute; left: -1000px; top: -1000px">
                                                     <input type="text" value="http://localhost:8000/p/{{ $post->id }}" id="copy_{{ $post->id }}" />
                                                 </li>
-                                 form               <li class="btn list-group-item" data-dismiss="modal" onclick="copyToClipboard('copy_{{ $post->id }}')">Copy Link</li>
+                                               <li class="btn list-group-item" data-dismiss="modal" onclick="copyToClipboard('copy_{{ $post->id }}')">Copy Link</li>
                                                 <li class="btn list-group-item" data-dismiss="modal">Cancel</li>
                                             </ul>
                                         </div>
