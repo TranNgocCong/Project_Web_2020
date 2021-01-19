@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Category;
 use App\Image;
+use App\User;
 class Album extends Model
 {
     protected $guarded = [];
@@ -15,5 +16,9 @@ class Album extends Model
 
     public function albumimages(){
         return $this->hasMany(Image::class, 'album_id', 'id');
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }
