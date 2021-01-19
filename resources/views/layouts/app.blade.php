@@ -9,7 +9,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     {{-- Title --}}
-    <title>{{ config('app.name', 'InstaClone') }}</title>
+    <title>Vivu</title>
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
+        type="image/icon type">
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -27,11 +29,15 @@
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
 
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 
 <body>
     <div id="app">
-
         <!-- Header section -->
         <nav class="navbar fixed-top navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container ">
@@ -83,11 +89,32 @@
                                     <i class="far fa-heart fa-2x"></i>
                                 </a>
                             </li> --}}
+                            <li class="nav-item dropdown no-arrow px-2">
+                                <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="far fa-heart fa-2x " , id="click_fade"></i>
+                                    <!-- Counter - Messages -->
+                                    <span class="badge badge-danger badge-counter" id="count_noti">0</span>
+                                </a>
+                                <!-- Dropdown - Messages -->
+                                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                    aria-labelledby="messagesDropdown" id="noti">
+                                    <h6 class="dropdown-header">
+                                        Message Center
+                                    </h6>
+                                    <a class="dropdown-item d-flex align-items-center" href="#">
+                                        <div class="dropdown-list-image mr-3">
+                                            <img class="rounded-circle" src="img/undraw_profile_1.svg" alt="">
+                                            <div class="status-indicator bg-success"></div>
+                                        </div>
+
+                                    </a>
+                                </div>
+                            </li>
                             <li class="nav-item pl-2">
                                 <a href="/profile/{{ Auth::user()->username }}" class="nav-link"
                                     style="width: 42px; height: 22px; padding-top: 6px;">
-                                    <img src="{{ asset(Auth::user()->profile->getProfileImage()) }}"
-                                        class="rounded-circle w-100">
+                                    <img src="{{ asset(Auth::user()->profile->image) }}" class="rounded-circle w-100">
                                     {{-- <i class="far fa-user fa-2x"></i>
                                     --}}
                                 </a>
@@ -119,7 +146,7 @@
 
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
-                                                                            document.getElementById('logout-form').submit();">
+                                                                                document.getElementById('logout-form').submit();">
                                             {{ __('Logout') }}
                                         </a>
 
@@ -148,5 +175,54 @@
     @yield('exscript')
 
 </body>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        var pusher = new Pusher('{{ env('
+            PUSHER_APP_KEY ') }}', {
+                encrypted: true,
+                cluster: "ap1",
+            });
+        var channel = pusher.subscribe('my-channel1');
+        let owner = "{{ Auth::user()->username }}";
+        channel.bind('my-event1', function(data) {
+            if (data.owner.username == owner) {
+                var newNotificationHtml = `
+        <a class="dropdown-item d-flex align-items-center" href="/p/` + data.cmtpost.id + `">
+                                        <div class="dropdown-list-image mr-3">
+                                            <img class="rounded-circle w-100" src="` + data.img.image + `"
+                                                alt="">
+                                            <div class="status-indicator bg-success"></div>
+                                        </div>
+                                        <div class="font-weight-bold">
+                                            <div class="text-truncate">` + data.commenter.name + ` đã bình luận về bài viết của bạn </div>
+
+                                        </div>
+                                    </a>
+        `;
+
+                $('#noti').append(newNotificationHtml);
+                let dem = $('#count_noti').text();
+                let dem1 = parseInt(dem) + 1;
+                $('#count_noti').text(dem1);
+            }
+
+
+        });
+        $('#click_fade').click(function() {
+            $('#count_noti').text(0);
+        });
+    });
+
+</script>
+<script>
+    $('#click_fade').click(function() {
+        $('#count_noti').text(0);
+    });
+
+</script>
 
 </html>

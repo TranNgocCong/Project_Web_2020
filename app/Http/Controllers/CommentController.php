@@ -6,10 +6,15 @@ use App\Comment;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Pusher\Pusher;
+use App\Events\CommentEvent;
+use App\Events\NotifyCommentEvent;
+use App\User;
+use App\Profile;
 
 class CommentController extends Controller
 {
-
+   
     public function __construct()
     {
         $this->middleware('auth');
@@ -44,18 +49,29 @@ class CommentController extends Controller
     public function store(Request $request)
     {
 
+     
         $post = Post::findOrFail($request->post_id);
-
-        Comment::create([
+        
+       $acc=Comment::create([
             'body' => $request->body,
             'user_id' => Auth::id(),
             'post_id' => $post->id
         ]);
+       $acc = $acc->fresh();
+       $username = User::where('id',Auth::id())->first();
+       $comment = Comment::where('body',$request->body)->first();
+       
+      $owner = User::where('id', $post->user_id)->first();
+      $profile = Profile::where('user_id', Auth::id())->first();
+      event(new NotifyCommentEvent($owner, $username,$profile,$post));
 
+        event(new CommentEvent($comment,$username));
+        
         if ($request->redirect) {
+            
             return redirect()->route('post.show', compact('post'));
         }
-
+       
         return redirect()->route('post.index');
     }
 

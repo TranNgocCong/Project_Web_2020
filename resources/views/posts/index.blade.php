@@ -18,7 +18,7 @@
                         <div class="card-header d-flex justify-content-between align-items-center bg-white pl-3 pr-1 py-2">
                             <div class="d-flex align-items-center">
                                 <a href="/profile/{{$post->user->username}}" style="width: 32px; height: 32px;">
-                                    <img src="{{ asset($post->user->profile->getProfileImage()) }}" class="rounded-circle w-100">
+                                    <img src="{{ asset($post->user->profile->image) }}" class="rounded-circle w-100">
                                 </a>
                                 <a href="/profile/{{$post->user->username}}" class="my-0 ml-3 text-dark text-decoration-none">
                                     {{ $post->user->name }}
@@ -148,7 +148,7 @@
                                     @if (count($post->comments) > 0)
                                         <a href="/p/{{ $post->id }}" class="text-muted">View all {{count($post->comments)}} comments</a>
                                     @endif
-                                    @foreach ($post->comments->sortByDesc("created_at")->take(2) as $comment)
+                                    @foreach ($post->comments->sortByDesc("created_at")->take(9) as $comment )
                                         <p  class='mb-1'><a href="/profile/{{$comment->user->username}}" >{{ $comment->user->name }}</a>  {{ $comment->body }}</p>
                                     @endforeach
                                 </div>
@@ -166,7 +166,7 @@
                                 <div class="form-group mb-0  text-muted">
                                     <div class="input-group is-invalid">
                                         <input type="hidden" name="post_id" value="{{$post->id}}">
-                                        <textarea class="form-control" id="body" name='body' rows="1" cols="1" style="border-style: none" placeholder="Add a comment..." required></textarea>
+                                        <input class="form-control" id="body" name='body' rows="1" cols="1" style="border-style: none" placeholder="Add a comment..." required></input>
                                         <div class="input-group-append">
                                             <button class="btn btn-md btn-outline-info" type="submit">Post</button>
                                         </div>
@@ -203,7 +203,7 @@
                     <!-- User Info -->
                     <div class="d-flex align-items-center mb-3">
                         <a href="/profile/{{Auth::user()->username}}" style="width: 56px; height: 56px;">
-                            <img src="{{ asset(Auth::user()->profile->getProfileImage()) }}" class="rounded-circle w-100">
+                            <img src="{{ asset(Auth::user()->profile->image) }}" class="rounded-circle w-100">
                         </a>
                         <div class='d-flex flex-column pl-3'>
                             <a href="/profile/{{Auth::user()->username}}" class='h6 m-0 text-dark text-decoration-none' >
@@ -225,7 +225,7 @@
                             <div class='suggestions py-2'>
                                 <div class="d-flex align-items-center ">
                                     <a href="/profile/{{$sugg_user->username}}" style="width: 32px; height: 32px;">
-                                        <img src="{{ asset($sugg_user->profile->getProfileImage()) }}" class="rounded-circle w-100">
+                                        <img src="{{ asset($sugg_user->profile->image) }}" class="rounded-circle w-100">
                                     </a>
                                     <div class='d-flex flex-column pl-3'>
                                         <a href="/profile/{{$sugg_user->username}}" class='h6 m-0 text-dark text-decoration-none' >
@@ -309,3 +309,26 @@
 
     </script> --}}
 @endsection
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
+        encrypted: true,
+        cluster: "ap1",
+    });
+    var channel = pusher.subscribe('my-channel');
+
+    channel.bind('my-event', function(data) {
+       
+        var newNotificationHtml = `
+        <p  class='mb-1'><a href="/profile/`+data.username.username+`" >`+data.username.username+`</a> `+data.data.body+`</p>
+        `;
+
+        $('.comments').append(newNotificationHtml);
+        
+    });
+    });
+    </script>

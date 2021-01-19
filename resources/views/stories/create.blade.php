@@ -1,6 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
+<script type='text/javascript'>
+function preview_image(event) 
+{
+ var reader = new FileReader();
+ reader.onload = function()
+ {
+  var output = document.getElementById('output_image');
+  output.src = reader.result;
+ }
+ reader.readAsDataURL(event.target.files[0]);
+}
+</script>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -38,19 +50,22 @@
 
                             <div class="col-md-6">
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input @error('image') is-invalid @enderror" name="image" id="image" >
+                                    <input type="file" class="custom-file-input @error('image') is-invalid @enderror" name="image" id="image" onchange="preview_image(event)" >
                                     <label class="custom-file-label" for="image">{{ old('image') ?? "Select Photo..." }}</label>
-
+                                    <div style ="padding-top:20px">
+                                    <img id="output_image" style="height:100px"/>
+                                    </div>
                                     @error('image')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
+                                    
                                 </div>
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0 ">
+                        <div class="form-group row mb-0" style = "margin-top:50px">
                             <div class="col-md-6 offset-md-4">
                                 <button  type="submit" class="btn btn-primary">
                                     Share

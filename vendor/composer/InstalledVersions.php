@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '2f16ce3cef6f5bb1af78d0d29b711cd74c4dc604',
+    'reference' => '0fadee95f200566147ed21455bf85c395fc51a21',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -447,7 +447,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '2f16ce3cef6f5bb1af78d0d29b711cd74c4dc604',
+      'reference' => '0fadee95f200566147ed21455bf85c395fc51a21',
     ),
     'laravel/tinker' => 
     array (
@@ -596,6 +596,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '84b4dfb120c6f9b4ff7b3685f9b8f1aa365a0c95',
+    ),
+    'paragonie/sodium_compat' => 
+    array (
+      'pretty_version' => 'v1.14.0',
+      'version' => '1.14.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'a1cfe0b21faf9c0b61ac0c6188c4af7fd6fd0db3',
     ),
     'phar-io/manifest' => 
     array (
@@ -796,6 +805,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '7c710551d4a2653afa259c544508dc18a9098956',
+    ),
+    'pusher/pusher-php-server' => 
+    array (
+      'pretty_version' => 'v3.3.1',
+      'version' => '3.3.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '2279bcd21a608a76f9be1fe0675aa2dd1efb2fa0',
     ),
     'ralouphie/getallheaders' => 
     array (

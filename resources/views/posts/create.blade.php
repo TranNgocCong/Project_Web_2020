@@ -53,7 +53,7 @@ function preview_image(event)
                                     <input type="file" class="custom-file-input @error('image') is-invalid @enderror" name="image" id="image" onchange="preview_image(event)">  
                                     <label class="custom-file-label" for="image">{{ old('image') ?? "Select Photo..." }}</label> 
                                     <div style ="padding-top:20px">
-                                    <img id="output_image" style="width:200px; height:100px"/>
+                                    <img id="output_image" style="height:100px"/>
                                     </div>
                                     @error('image')
                                         <span class="invalid-feedback" role="alert">
@@ -64,7 +64,7 @@ function preview_image(event)
                             </div>
                         </div>
                             
-                        <div class="form-group row mb-0" style = "margin-top:50px">
+                        <div class="form-group row mb-0" style = "margin-top:150px">
                             <div class="col-md-6 offset-md-4">
                                 <button  type="submit" class="btn btn-primary">
                                     Share
