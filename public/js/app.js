@@ -39265,7 +39265,7 @@ var render = function() {
               _c("td", { staticClass: "w-25" }, [
                 _c("img", {
                   staticClass: "img-fluid img-thumbnail",
-                  attrs: { src: "/album/" + album.image }
+                  attrs: { src: album.image }
                 })
               ]),
               _vm._v(" "),
@@ -39456,7 +39456,7 @@ var render = function() {
               _c("a", { attrs: { href: "#" } }, [
                 _c("img", {
                   staticClass: "img-fluid img-thumbnail",
-                  attrs: { src: "'/images/'+image.image" }
+                  attrs: { src: image.image }
                 }),
                 _vm._v(" "),
                 _c(

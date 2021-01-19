@@ -6,7 +6,7 @@ use App\Album;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Image;
-
+use Storage;
 class GalleryController extends Controller
 {
     public function create($id){
@@ -29,11 +29,12 @@ class GalleryController extends Controller
 
         foreach($request->file('files') as $file){
             $name = $file->hashName();
-            $file->move(public_path().'/images/',$name);
-
+            //$file->move(public_path().'/images/',$name);
+            $filePath = 'images/images/'.$name;
+            $path=Storage::disk('s3')->put($filePath, file_get_contents($file));
             $file = new Image;
             $file->album_id = $request->album_id;
-            $file->image = $name;
+            $file->image = 'https://vivu1.s3.amazonaws.com/images/images/'. $name;
             $file->save();
         }
         return response()->json(['success'=>'Your images successfully upload']);
