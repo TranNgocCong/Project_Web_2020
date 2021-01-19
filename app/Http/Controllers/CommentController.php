@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Pusher\Pusher;
 use App\Events\CommentEvent;
 use App\User;
-
+use App\Profile;
+use App\Events\Notify;
 class CommentController extends Controller
 {
    
@@ -59,7 +60,9 @@ class CommentController extends Controller
        $username = User::where('id',Auth::id())->first();
         $comment = Comment::where('body',$request->body)->first();
         echo($comment);
-
+        $owner = User::where('id',$post->user_id)->first();
+        $profile =Profile::where('id',Auth::id())->first();
+        event(new Notify($owner, $username, $post, $profile));
         event(new CommentEvent($comment,$username));
         
         if ($request->redirect) {
