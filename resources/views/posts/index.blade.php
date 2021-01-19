@@ -148,7 +148,7 @@
                                     @if (count($post->comments) > 0)
                                         <a href="/p/{{ $post->id }}" class="text-muted">View all {{count($post->comments)}} comments</a>
                                     @endif
-                                    @foreach ($post->comments->sortByDesc("created_at")->take(9) as $comment )
+                                    @foreach ($post->comments->sortBy("created_at")->take(9) as $comment )
                                         <p  class='mb-1'><a href="/profile/{{$comment->user->username}}" >{{ $comment->user->name }}</a>  {{ $comment->body }}</p>
                                     @endforeach
                                 </div>

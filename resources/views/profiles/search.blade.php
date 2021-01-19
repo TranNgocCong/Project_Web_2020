@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container" style="margin-top: 2%">
 
         @if(isset($details))
             <h3>Search results for : <b>{{ $query }} </b></h3>

@@ -23,7 +23,7 @@
                             <div class="card-header">
                                 <div class="d-flex align-items-center">
                                     <a href="/profile/{{$post->user->username}}" style="width: 32px; height: 32px;">
-                                        <img src="{{ asset($post->user->profile->getProfileImage()) }}" class="rounded-circle w-100">
+                                        <img src="{{ asset($post->user->profile->image) }}" class="rounded-circle w-100">
                                     </a>
                                     <a href="/profile/{{$post->user->username}}" class="my-0 ml-3 text-dark text-decoration-none">
                                         <strong> {{ $post->user->name }}</strong>
@@ -39,7 +39,7 @@
                                 <div class="row">
                                     <div class="col-2">
                                         <a href="/profile/{{$post->user->username}}">
-                                            <img src="{{ asset($post->user->profile->getProfileImage()) }}" class="rounded-circle w-100">
+                                            <img src="{{ asset($post->user->profile->image) }}" class="rounded-circle w-100">
                                         </a>
                                     </div>
                                     <div class="col-10 pl-0">
@@ -57,7 +57,7 @@
                                     <div class="row my-3">
                                         <div class="col-2">
                                             <a href="/profile/{{$comment->user->username}}">
-                                                <img src="{{ asset($comment->user->profile->getProfileImage()) }}" class="rounded-circle w-100">
+                                                <img src="{{ asset($comment->user->profile->image) }}" class="rounded-circle w-100">
                                             </a>
                                         </div>
                                         <div class="col-10 pl-0">
@@ -75,7 +75,7 @@
                             <!-- Card Footer -->
                             <div class="card-footer align-self-end w-100 p-0 border-top-0">
                                 <!-- Post State -->
-                                <div class="py-2 px-3 border">
+                                <div class="py-2 px-3 border" style="width: 226.42px">
                                     <div class="d-flex flex-row">
                                         {{-- Like Btn --}}
                                         @if($post->like->isEmpty())
@@ -153,10 +153,10 @@
                                 <form action="{{ action('CommentController@store') }}" method="POST">
                                     @csrf
                                     <div class="form-group mb-0 text-muted">
-                                        <div class="input-group is-invalid">
+                                        <div class="input-group is-invalid" >
                                             <input type="hidden" name="post_id" value="{{$post->id}}">
                                             <input type="hidden" name="redirect" value="show">
-                                            <textarea class="form-control py-2 px-3" id="body" name='body' rows="1" placeholder="Add a comment..." required></textarea>
+                                            <input class="form-control py-2 px-3" style="width: 150px" id="body" name='body' rows="1" placeholder="Add a comment..." required></input>
                                             <div class="input-group-append">
                                                 <button class="btn btn-md btn-outline-info" type="submit">Post</button>
                                             </div>
@@ -190,7 +190,7 @@
                     @foreach ($posts as $post)
                         <div class="col-4 col-md-4 mb-2  align-self-stretch">
                             <a href="/p/{{ $post->id }}">
-                                <img class="img rounded" height="300" src="{{ asset("storage/$post->image") }}">
+                                <img class="img rounded" height="300" src="{{ $post->image }}">
                             </a>
                         </div>
                     @endforeach

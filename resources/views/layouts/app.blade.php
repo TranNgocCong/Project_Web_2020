@@ -85,9 +85,9 @@
                             <li class="nav-item dropdown no-arrow px-2">
                                 <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="far fa-heart fa-2x"></i>
+                                    <i class="far fa-heart fa-2x" id="click-fade"></i>
                                     <!-- Counter - Messages -->
-                                    <span class="badge badge-danger badge-counter">7</span>
+                                    <span class="badge badge-danger badge-counter" id="count_noti"> </span>
                                 </a>
                                 <!-- Dropdown - Messages -->
                                 <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -95,16 +95,7 @@
                                     <h6 class="dropdown-header">
                                         Message Center
                                     </h6>
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="dropdown-list-image mr-3">
-                                            <img class="rounded-circle" src="img/undraw_profile_1.svg" alt="">
-                                            <div class="status-indicator bg-success"></div>
-                                        </div>
-                                        <div class="font-weight-bold">
-                                            <div class="text-truncate">Thuc MAIIIII đã bình luận bài viết của bạn</div>
-                                            <div class="small text-gray-500">Emily Fowler · 58m</div>
-                                        </div>
-                                    </a>
+
                                 </div>
                             </li>
                             <li class="nav-item pl-2">
@@ -144,7 +135,7 @@
                                             Album</a>
 
                                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                            document.getElementById('logout-form').submit();">
+                                                                document.getElementById('logout-form').submit();">
                                             {{ __('Logout') }}
                                         </a>
 
@@ -188,24 +179,38 @@
 
                 if (data.owner.username == owner) {
                     var newNotificationHtml = `
-        <a class="dropdown-item d-flex align-items-center" href="#">
+        <a class="dropdown-item d-flex align-items-center" href="/p/` + data.link.id + `">
             <div class="dropdown-list-image mr-3">
                 <img class="rounded-circle fix-size" src="` + data.avano.image + `" alt="">
                     <div class="status-indicator bg-success"></div>
                     </div>
                 <div class="font-weight-bold">
                     <div class="text-truncate">` + data.commenter.name + ` đã bình luận bài viết của bạn</div>
-                    <div class="small text-gray-500">Emily Fowler · 58m</div>
+
                 </div>
         </a>
         `;
 
                     $('#noti').append(newNotificationHtml);
+                    $('#count_noti').show();
+                    let count = $('#count_noti').text();
+                    if (isNaN(parseInt(count))) {
+                        $('#count_noti').text(1);
+                    } else {
+                        let count1 = parseInt(count) + 1;
+                        $('#count_noti').text(count1);
+                    }
+
                 }
+            });
+            $("#click-fade").click(function() {
+                $('#count_noti').text(" ");
+                $('#count_noti').hide();
             });
         });
 
     </script>
+
 </body>
 
 </html>
