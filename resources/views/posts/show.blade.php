@@ -75,7 +75,7 @@
                             <!-- Card Footer -->
                             <div class="card-footer align-self-end w-100 p-0 border-top-0">
                                 <!-- Post State -->
-                                <div class="py-2 px-3 border">
+                                <div class="py-2 px-3 border" style="width: 226.42px">
                                     <div class="d-flex flex-row">
                                         {{-- Like Btn --}}
                                         @if($post->like->isEmpty())
@@ -153,10 +153,10 @@
                                 <form action="{{ action('CommentController@store') }}" method="POST">
                                     @csrf
                                     <div class="form-group mb-0 text-muted">
-                                        <div class="input-group is-invalid">
+                                        <div class="input-group is-invalid" >
                                             <input type="hidden" name="post_id" value="{{$post->id}}">
                                             <input type="hidden" name="redirect" value="show">
-                                            <textarea class="form-control py-2 px-3" id="body" name='body' rows="1" placeholder="Add a comment..." required></textarea>
+                                            <input class="form-control py-2 px-3" style="width: 150px" id="body" name='body' rows="1" placeholder="Add a comment..." required></input>
                                             <div class="input-group-append">
                                                 <button class="btn btn-md btn-outline-info" type="submit">Post</button>
                                             </div>
