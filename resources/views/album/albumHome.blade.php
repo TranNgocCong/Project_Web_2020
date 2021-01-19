@@ -15,7 +15,11 @@
             @foreach ($albums as $album)
                 <div class="col-lg-3">
                     <div class="card">
-                        <img src="{{ $album->image }}" class="card-img-top">
+                        <div style="width:100%; text-align:center">
+                            <img src="{{ $album->image }}" class="card-img-top"
+                                style="width: 100px; height: 100px; object-fit: cover;">
+                        </div>
+
                         <div class="card-body">
                             <h5 class="card-title">
                                 <center>{{ $album->name }}</center>
