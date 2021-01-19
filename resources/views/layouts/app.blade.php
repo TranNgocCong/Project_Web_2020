@@ -10,7 +10,8 @@
 
     {{-- Title --}}
     <title>Vivu</title>
-    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" type="image/icon type">
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
+        type="image/icon type">
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -90,14 +91,13 @@
                                 </a>
                                 <!-- Dropdown - Messages -->
                                 <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                    aria-labelledby="messagesDropdown" id ="noti">
+                                    aria-labelledby="messagesDropdown" id="noti">
                                     <h6 class="dropdown-header">
                                         Message Center
                                     </h6>
                                     <a class="dropdown-item d-flex align-items-center" href="#">
                                         <div class="dropdown-list-image mr-3">
-                                            <img class="rounded-circle" src="img/undraw_profile_1.svg"
-                                                alt="">
+                                            <img class="rounded-circle" src="img/undraw_profile_1.svg" alt="">
                                             <div class="status-indicator bg-success"></div>
                                         </div>
                                         <div class="font-weight-bold">
@@ -110,8 +110,7 @@
                             <li class="nav-item pl-2">
                                 <a href="/profile/{{ Auth::user()->username }}" class="nav-link"
                                     style="width: 42px; height: 22px; padding-top: 6px;">
-                                    <img src="{{ asset(Auth::user()->profile->image) }}"
-                                        class="rounded-circle w-100">
+                                    <img src="{{ asset(Auth::user()->profile->image) }}" class="rounded-circle w-100">
                                     {{-- <i class="far fa-user fa-2x"></i>
                                     --}}
                                 </a>
@@ -141,8 +140,11 @@
 
                                         <a class="dropdown-item" href="{{ url('/albums') }}" role="button">My Album</a>
 
+                                        <a class="dropdown-item" href="{{ url('/allAlbums') }}" role="button">All User's
+                                            Album</a>
+
                                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();">
+                                                            document.getElementById('logout-form').submit();">
                                             {{ __('Logout') }}
                                         </a>
 
@@ -169,38 +171,40 @@
     </div>
 
     @yield('exscript')
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        var pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
-        encrypted: true,
-        cluster: "ap1",
-    });
-    var channel = pusher.subscribe('my-channel1');
-    let owner = "{{Auth::user()->username}}";
-    channel.bind('my-event1', function(data) {
-    
-       if(data.owner.username==owner){
-        var newNotificationHtml = `
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var pusher = new Pusher('{{ env('
+                PUSHER_APP_KEY ') }}', {
+                    encrypted: true,
+                    cluster: "ap1",
+                });
+            var channel = pusher.subscribe('my-channel1');
+            let owner = "{{ Auth::user()->username }}";
+            channel.bind('my-event1', function(data) {
+
+                if (data.owner.username == owner) {
+                    var newNotificationHtml = `
         <a class="dropdown-item d-flex align-items-center" href="#">
             <div class="dropdown-list-image mr-3">
-                <img class="rounded-circle fix-size" src="`+data.avano.image+`" alt="">
+                <img class="rounded-circle fix-size" src="` + data.avano.image + `" alt="">
                     <div class="status-indicator bg-success"></div>
                     </div>
                 <div class="font-weight-bold">
-                    <div class="text-truncate">`+data.commenter.name+` đã bình luận bài viết của bạn</div>
+                    <div class="text-truncate">` + data.commenter.name + ` đã bình luận bài viết của bạn</div>
                     <div class="small text-gray-500">Emily Fowler · 58m</div>
                 </div>
         </a>
         `;
 
-        $('#noti').append(newNotificationHtml);
-       }
-    });
-    });
+                    $('#noti').append(newNotificationHtml);
+                }
+            });
+        });
+
     </script>
 </body>
 

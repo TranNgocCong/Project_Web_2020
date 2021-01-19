@@ -15,6 +15,9 @@
 // Auth Route
 Auth::routes();
 
+//Frontend Controller
+Route::get('/allAlbums', 'FrontendController@index');
+
 // Comment Route
 Route::resource('comments', 'CommentController');
 
@@ -78,4 +81,4 @@ Route::get('getimages', 'GalleryController@images')->middleware('auth');
 
 Route::delete('/image/{id}', 'GalleryController@destroy');
 
-Route::get('/albums/{slug}/{id}', 'GalleryController@viewAlbum');
+Route::get('/albums/{slug}/{id}', 'GalleryController@viewAlbum')->name('view.album');
