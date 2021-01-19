@@ -86,7 +86,7 @@
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="far fa-heart fa-2x"></i>
                                     <!-- Counter - Messages -->
-                                    <span class="badge badge-danger badge-counter">7</span>
+                                    <span class="badge badge-danger badge-counter" id ="count_noti"></span>
                                 </a>
                                 <!-- Dropdown - Messages -->
                                 <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
