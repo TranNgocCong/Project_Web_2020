@@ -10,12 +10,15 @@
 
     {{-- Title --}}
     <title>Vivu</title>
-    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" type="image/icon type">
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
+        type="image/icon type">
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"
+        defer>
+    </script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     {{--
@@ -24,7 +27,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
 
 </head>
 
@@ -84,24 +87,23 @@
                             <li class="nav-item dropdown no-arrow px-2">
                                 <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="far fa-heart fa-2x" id ="click-fade"></i>
+                                    <i class="far fa-heart fa-2x" id="click-fade"></i>
                                     <!-- Counter - Messages -->
-                                    <span class="badge badge-danger badge-counter" id ="count_noti"> </span>
+                                    <span class="badge badge-danger badge-counter" id="count_noti"> </span>
                                 </a>
                                 <!-- Dropdown - Messages -->
                                 <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                    aria-labelledby="messagesDropdown" id ="noti">
+                                    aria-labelledby="messagesDropdown" id="noti">
                                     <h6 class="dropdown-header">
                                         Message Center
                                     </h6>
-                                    
+
                                 </div>
                             </li>
                             <li class="nav-item pl-2">
                                 <a href="/profile/{{ Auth::user()->username }}" class="nav-link"
                                     style="width: 42px; height: 22px; padding-top: 6px;">
-                                    <img src="{{ asset(Auth::user()->profile->image) }}"
-                                        class="rounded-circle w-100">
+                                    <img src="{{ asset(Auth::user()->profile->image) }}" class="rounded-circle w-100">
                                     {{-- <i class="far fa-user fa-2x"></i>
                                     --}}
                                 </a>
@@ -131,8 +133,12 @@
 
                                         <a class="dropdown-item" href="{{ url('/albums') }}" role="button">My Album</a>
 
-                                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();">
+                                        <a class="dropdown-item" href="{{ url('/allAlbums') }}" role="button">All User's
+                                            Album</a>
+
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                                                document.getElementById('logout-form').submit();">
                                             {{ __('Logout') }}
                                         </a>
 
@@ -159,53 +165,55 @@
     </div>
 
     @yield('exscript')
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        var pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
-        encrypted: true,
-        cluster: "ap1",
-    });
-    var channel = pusher.subscribe('my-channel1');
-    let owner = "{{Auth::user()->username}}";
-    channel.bind('my-event1', function(data) {
-    
-       if(data.owner.username==owner){
-        var newNotificationHtml = `
-        <a class="dropdown-item d-flex align-items-center" href="/p/`+data.link.id+`">
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var pusher = new Pusher('{{ env('
+                PUSHER_APP_KEY ') }}', {
+                    encrypted: true,
+                    cluster: "ap1",
+                });
+            var channel = pusher.subscribe('my-channel1');
+            let owner = "{{ Auth::user()->username }}";
+            channel.bind('my-event1', function(data) {
+
+                if (data.owner.username == owner) {
+                    var newNotificationHtml = `
+        <a class="dropdown-item d-flex align-items-center" href="/p/` + data.link.id + `">
             <div class="dropdown-list-image mr-3">
-                <img class="rounded-circle fix-size" src="`+data.avano.image+`" alt="">
+                <img class="rounded-circle fix-size" src="` + data.avano.image + `" alt="">
                     <div class="status-indicator bg-success"></div>
                     </div>
                 <div class="font-weight-bold">
-                    <div class="text-truncate">`+data.commenter.name+` đã bình luận bài viết của bạn</div>
-                    
+                    <div class="text-truncate">` + data.commenter.name + ` đã bình luận bài viết của bạn</div>
+
                 </div>
         </a>
         `;
 
-        $('#noti').append(newNotificationHtml);
-        $('#count_noti').show();
-        let count = $('#count_noti').text();
-        if(isNaN(parseInt(count))){
-            $('#count_noti').text(1);
-        }else{
-            let count1 = parseInt(count)+1;
-        $('#count_noti').text(count1);
-        }
-        
-       }
-    });
-    $( "#click-fade" ).click(function() {
-            $('#count_noti').text(" ");
-            $('#count_noti').hide();
+                    $('#noti').append(newNotificationHtml);
+                    $('#count_noti').show();
+                    let count = $('#count_noti').text();
+                    if (isNaN(parseInt(count))) {
+                        $('#count_noti').text(1);
+                    } else {
+                        let count1 = parseInt(count) + 1;
+                        $('#count_noti').text(count1);
+                    }
+
+                }
+            });
+            $("#click-fade").click(function() {
+                $('#count_noti').text(" ");
+                $('#count_noti').hide();
+            });
         });
-    });
+
     </script>
-   
+
 </body>
 
 </html>
